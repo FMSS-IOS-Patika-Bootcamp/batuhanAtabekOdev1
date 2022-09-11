@@ -7,13 +7,31 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+protocol ViewControllerDelegate : AnyObject{
+    func didTapButton(item:CarModel)
+}
 
+class ViewController: UIViewController {
+    
+    @IBOutlet weak var carTypeTextField: UITextField!
+    @IBOutlet weak var carColorTextField: UITextField!
+    @IBOutlet weak var carModelTextField: UITextField!
+    @IBOutlet weak var carIdTextField: UITextField!
+    
+    weak var delegate : ViewControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
 
-
+    @IBAction func didPassData(_ sender: Any) {
+        
+        delegate?.didTapButton(item: CarModel(carModelYear: carIdTextField.text,
+                                              carModelName: carModelTextField.text,
+                                              carColor: carColorTextField.text,
+                                              carType: carTypeTextField.text))
+        dismiss(animated: true)
+    }
+    
 }
 

@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+struct CarModel{
+    var carModelYear : String?
+    var carModelName : String?
+    var carColor : String?
+    var carType : String?
+}

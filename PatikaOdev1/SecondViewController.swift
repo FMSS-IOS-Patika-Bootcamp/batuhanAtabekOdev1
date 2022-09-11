@@ -7,23 +7,33 @@
 
 import UIKit
 
-class SecondViewController: UIViewController {
-
+class SecondViewController: UIViewController , ViewControllerDelegate {
+    
+    @IBOutlet weak var carTypeLabel: UILabel!
+    @IBOutlet weak var carColorLabel: UILabel!
+    @IBOutlet weak var carModelYearLabel: UILabel!
+    @IBOutlet weak var carModelLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "toSecondController" {
+            let firstVC : ViewController = segue.destination as! ViewController
+            firstVC.delegate = self
+        }
     }
-    */
+    
+    func didTapButton(item: CarModel) {
+        carModelLabel.text = "Modeli " + item.carModelYear!
+        carTypeLabel.text = "Kasa Tipi " + item.carType!
+        carColorLabel.text = "Rengi " + item.carColor!
+        carModelYearLabel.text = "Model Yılı " + item.carModelName!
+    }
+    
+    @IBAction func insertData(_ sender: Any) {
+        performSegue(withIdentifier: "toSecondController", sender: nil)
+    }
 
 }
